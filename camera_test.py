@@ -9,6 +9,7 @@ Point3D = namedtuple('Point3D', ['x', 'y', 'z'])
 
 # ==================== Settings ====================
 # q - quit; w s a d - move box;
+RGB_RES = dai.ColorCameraProperties.SensorResolution.THE_800_P
 FPS = 15
 LEFT_BOX = Box(120, 100, 150, 75)
 UNDISTORT_RGB = True
@@ -85,7 +86,7 @@ xouts = {name: pipeline.createXLinkOut() for name in cams.keys()}
 
 # ==================== RGB pipeline ====================
 cams[RGB].setBoardSocket(dai.CameraBoardSocket.CAM_A)  # rgb
-cams[RGB].setResolution(dai.ColorCameraProperties.SensorResolution.THE_800_P)
+cams[RGB].setResolution(RGB_RES)
 if UNDISTORT_RGB:
   manip = pipeline.create(dai.node.ImageManip)
   manip.setMaxOutputFrameSize(cams[RGB].getIspWidth() * cams[RGB].getIspHeight() * 3 // 2)
